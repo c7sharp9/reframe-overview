@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReFrame — Business Overview</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #d2a8ff;
+    --accent4: #f0883e;
+    --accent5: #ff7b72;
+    --accent6: #79c0ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.7; font-size: 15px;
+  }
+  /* LAYOUT */
+  .layout { display: flex; min-height: 100vh; }
+  nav {
+    width: 280px; min-width: 280px; background: var(--surface);
+    border-right: 1px solid var(--border); padding: 24px 0;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  nav::-webkit-scrollbar { width: 4px; }
+  nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  main { flex: 1; max-width: 900px; padding: 40px 48px 80px; }
+  .nav-title {
+    font-size: 18px; font-weight: 700; padding: 0 20px 16px;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .nav-section {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-dim);
+    padding: 12px 20px 4px;
+  }
+  nav a {
+    display: block; padding: 6px 20px; color: var(--text-dim);
+    text-decoration: none; font-size: 13px; transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+  nav a:hover { color: var(--text); background: var(--surface2); border-left-color: var(--accent); }
+
+  /* CONTENT */
+  h1 { font-size: 32px; font-weight: 700; margin: 0 0 8px; color: var(--text); }
+  .subtitle { color: var(--text-dim); font-size: 16px; margin-bottom: 40px; }
+  h2 {
+    font-size: 22px; font-weight: 700; margin: 48px 0 16px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    color: var(--accent);
+  }
+  h3 { font-size: 17px; font-weight: 600; margin: 28px 0 10px; color: var(--accent3); }
+  h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--accent4); }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 14px 20px; }
+  li { margin-bottom: 4px; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px; margin: 16px 0;
+  }
+  .card-accent { border-left: 3px solid var(--accent); }
+  .card-green { border-left: 3px solid var(--accent2); }
+  .card-purple { border-left: 3px solid var(--accent3); }
+  .card-orange { border-left: 3px solid var(--accent4); }
+  .card-red { border-left: 3px solid var(--accent5); }
+  .card-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .card-title.blue { color: var(--accent); }
+  .card-title.green { color: var(--accent2); }
+  .card-title.purple { color: var(--accent3); }
+  .card-title.orange { color: var(--accent4); }
+  .card-title.red { color: var(--accent5); }
+
+  /* QUOTE / CALLOUT */
+  .quote {
+    background: var(--surface2); border-left: 3px solid var(--accent);
+    padding: 16px 20px; margin: 16px 0; border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim);
+  }
+  .quote strong { color: var(--text); font-style: normal; }
+  .callout {
+    background: rgba(88,166,255,.08); border: 1px solid rgba(88,166,255,.2);
+    border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+  }
+  .callout-warn {
+    background: rgba(240,136,62,.08); border: 1px solid rgba(240,136,62,.2);
+  }
+  .callout-good {
+    background: rgba(63,185,80,.08); border: 1px solid rgba(63,185,80,.2);
+  }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { background: var(--surface2); text-align: left; padding: 10px 14px; border: 1px solid var(--border); font-weight: 600; color: var(--accent6); }
+  td { padding: 10px 14px; border: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--surface); }
+
+  /* SCRIPT BOX */
+  .script {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 20px; margin: 16px 0;
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px;
+    white-space: pre-wrap; line-height: 1.8;
+  }
+
+  /* TAG */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+  }
+  .tag-blue { background: rgba(88,166,255,.15); color: var(--accent); }
+  .tag-green { background: rgba(63,185,80,.15); color: var(--accent2); }
+  .tag-purple { background: rgba(210,168,255,.15); color: var(--accent3); }
+  .tag-orange { background: rgba(240,136,62,.15); color: var(--accent4); }
+  .tag-red { background: rgba(255,123,114,.15); color: var(--accent5); }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { display: none; }
+    main { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-title">ReFrame Overview</div>
+
+  <div class="nav-section">I. The Company</div>
+  <a href="#identity">Identity & Category</a>
+  <a href="#superpower">The Hidden Superpower</a>
+  <a href="#what-you-sell">What ReFrame Actually Sells</a>
+
+  <div class="nav-section">II. The Product</div>
+  <a href="#corporate">Corporate Studios</a>
+  <a href="#events">Events / Trade Shows</a>
+  <a href="#networks">Networks & Agencies</a>
+  <a href="#partner-studios">Partner Studios</a>
+  <a href="#content-hub">The Content Hub</a>
+  <a href="#smilestudio">SmileStudio.tv</a>
+
+  <div class="nav-section">III. Pricing & Economics</div>
+  <a href="#pricing">Prepay Ladder & Terms</a>
+  <a href="#unit-economics">Unit Economics</a>
+  <a href="#cac">CAC Caps & Guardrails</a>
+  <a href="#money-model">Money Model at Scale</a>
+  <a href="#tam">Current Capacity</a>
+
+  <div class="nav-section">IV. Ideal Customer</div>
+  <a href="#icp">ICP Criteria</a>
+  <a href="#verticals">Verticals (Priority Order)</a>
+  <a href="#la-advantage">LA-Local Advantage</a>
+  <a href="#content-gap">Content Gap Approach</a>
+
+  <div class="nav-section">V. Team & Compensation</div>
+  <a href="#ae-role">Full-Cycle AE Role</a>
+  <a href="#ae-comp">AE Comp Plan</a>
+  <a href="#am-comp">AM Comp Plan</a>
+  <a href="#candidate-pitch">The Earning Opportunity</a>
+
+  <div class="nav-section">VI. Agency Program</div>
+  <a href="#agency-program">Wholesale Partner Program</a>
+
+  <div class="nav-section">VII. Strategic Priorities</div>
+  <a href="#priority-stack">Priority Stack</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+
+<h1>ReFrame — Business Overview</h1>
+<p class="subtitle">Company overview, product, pricing, and strategic direction. Updated February 2026.</p>
+
+<!-- ==================== I. THE COMPANY ==================== -->
+
+<h2 id="identity">I. Identity & Category</h2>
+
+<div class="callout">
+  ReFrame is NOT a podcast company. NOT a production company. NOT an agency.<br><br>
+  ReFrame builds <strong>Corporate Media Infrastructure</strong>.
+</div>
+
+<p>Infrastructure has three characteristics that make it valuable:</p>
+<ul>
+  <li><strong>Embedded into operations</strong> — installed in their office, used weekly</li>
+  <li><strong>Difficult to replace</strong> — custom virtual sets, equipment, workflows all integrated</li>
+  <li><strong>Justified as ongoing spend</strong> — not a project, it's a capability</li>
+</ul>
+<p>Most vendors are replaceable. Infrastructure is not. That is enterprise value.</p>
+
+<h3 id="superpower">The Hidden Superpower: Standardization</h3>
+
+<div class="quote">
+  <strong>"One standardized, self-contained studio system that can be duplicated without modification."</strong>
+</div>
+
+<p>Standardization is what allows companies to scale without operational chaos. ReFrame engineered the system first — before the brand, before the marketing, before the positioning. Deploy 5 studios as easily as 1. Quality doesn't degrade as the company scales. Every component — lighting, cameras, audio, angles — pre-engineered and tested.</p>
+
+<h3 id="what-you-sell">What ReFrame Actually Sells</h3>
+
+<div class="card card-accent">
+  <div class="card-title blue">It's Not Video. It's Operational Relief.</div>
+  <p>Marketing leaders are drowning in complexity. Every content initiative means vendors, tools, workflows, approvals. ReFrame removes all of it.</p>
+</div>
+
+<p>The three layers of this story serve different purposes:</p>
+<table>
+  <tr><th>Context</th><th>Language</th><th>Purpose</th></tr>
+  <tr><td>Website / Brand</td><td>"A completely turnkey video podcast solution: studio installed, equipment included, production handled end-to-end."</td><td>The actual hero copy on reframe.fm — clear, complete, authoritative</td></tr>
+  <tr><td>Cold DMs / Emails</td><td>"Turnkey in-office video podcast studio. From $5,995/mo."</td><td>Gets replies — concrete, immediate, understood</td></tr>
+  <tr><td>Sales Calls / Deeper</td><td>"We install media capability inside organizations."</td><td>Wins meetings — justifies 12-month commitment, premium positioning</td></tr>
+</table>
+
+<p><strong>Tactical language opens doors. Strategic language closes them.</strong></p>
+
+<hr class="divider">
+
+<!-- ==================== II. THE PRODUCT ==================== -->
+
+<h2 id="corporate">II. The Product</h2>
+
+<h3>Corporate Studios <span class="tag tag-green">THE EMPIRE BUILDER</span></h3>
+
+<p>ReFrame's core offering. Companies want professional video podcast capabilities without the complexity of building production infrastructure. Corporate studios are the backbone of the business — driving retention, predictability, and expansion revenue.</p>
+
+<h4>What ReFrame Delivers (Monthly — Standard Package)</h4>
+<ul>
+  <li><strong>4 fully edited video podcast episodes</strong> (30-60 min each)</li>
+  <li><strong>20 hand-curated social media clips</strong> (5 per episode)</li>
+  <li>Professional equipment installation and ongoing maintenance (~$20K in pro gear)</li>
+  <li>Custom-branded virtual set designed to match their brand</li>
+  <li>Multi-camera editing and virtual set integration</li>
+  <li>Color correction, audio optimization</li>
+  <li>Ongoing technical support and strategic consultation</li>
+</ul>
+
+<div class="callout">
+  <strong>What's in the base package vs. what's possible:</strong> ReFrame delivers 4 episodes + 20 clips monthly. That's the standard deliverable. But each of those episodes is <em>pillar anchor content</em> — from it, clients should be creating blog posts, newsletters, carousels, quote graphics, and more. The base package gives them the raw fuel. The <a href="#content-hub">Content Hub</a> (sold separately or bundled into premium tiers) is where that content multiplication gets done for them.
+</div>
+
+<h4>The "No" Framework</h4>
+<div class="card card-green">
+  <ul>
+    <li><strong>No build-out</strong></li>
+    <li><strong>No equipment purchases</strong></li>
+    <li><strong>No new staff</strong></li>
+  </ul>
+  <p style="margin-top:10px;margin-bottom:0">This is ReFrame's core promise — reflected across the website and all client-facing materials.</p>
+</div>
+
+<h4>What One Recording Session Can Fuel</h4>
+<p>The 4 episodes + 20 clips ReFrame delivers are the starting point. From that pillar content, the client's team (or the Content Hub add-on) can create: YouTube long-form &middot; LinkedIn posts &middot; Instagram carousels &middot; TikTok / Reels &middot; Podcast audio (Spotify, Apple) &middot; Newsletter material &middot; Blog posts &middot; Internal comms &middot; Quote graphics. <strong>This is the content multiplication effect — one recording session fuels an entire content ecosystem.</strong></p>
+
+<h4>Content Applications</h4>
+<table>
+  <tr><th>Category</th><th>Use Cases</th></tr>
+  <tr><td>Leadership Comms</td><td>Executive updates, vision sharing, town halls, thought leadership, industry insights</td></tr>
+  <tr><td>Internal Engagement</td><td>Employee spotlights, team updates, training content, culture initiatives</td></tr>
+  <tr><td>External Marketing</td><td>Customer success stories, product demos, partner collaborations, competitive positioning</td></tr>
+</table>
+
+<h4>On-Site Advantages</h4>
+<p>Studio always ready when opportunities arise. No external scheduling. Easy guest access. Authentic conversations. Spontaneous content capture. Higher exec participation.</p>
+
+<h4>Implementation Timeline</h4>
+<table>
+  <tr><th>Phase</th><th>Timing</th><th>What Happens</th></tr>
+  <tr><td>Design & Planning</td><td>Week 1</td><td>Strategic consultation, custom virtual set design, space assessment, content strategy</td></tr>
+  <tr><td>Installation</td><td>Week 2</td><td>Equipment install + config, lighting/cameras/audio, virtual set implementation, QA</td></tr>
+  <tr><td>Training & Launch</td><td>Week 3</td><td>Operational training ("hit record, send footage"), first session with support, workflow demo</td></tr>
+</table>
+
+<h4>Technical Specs</h4>
+<p><strong>2-Camera Setup (~$17,500):</strong> 2× pro 4K cameras, 5× LED lights with softboxes, 2× broadcast mics, multi-channel audio interface, pro video switcher with ISO recording, green screen.</p>
+<p><strong>3-Camera Setup (~$22,500):</strong> Same as above + additional wide-angle camera, enhanced lighting.</p>
+<p><strong>Space:</strong> 2-camera: 18'×18' min. 3-camera: 30'×20'. Minimal ambient noise.</p>
+<p><strong>Delivery:</strong> Long-form video and audio podcast. 5 vertical social media clips per episode optimized for social platforms. 2-week guaranteed turnaround.</p>
+
+<h4>Market Stats</h4>
+<p>$30.7B market (2024) → $131B by 2030 (27% CAGR). Video podcasts grew 18% → 36% of content in 5 years. Video clips are #1 source of podcast discovery. 73% of executives say video directly impacts revenue. Video posts get 48% more views than text. Companies with video grow revenue 49% faster.</p>
+
+<hr class="divider">
+
+<h3 id="events">Events / Trade Shows <span class="tag tag-orange">CASH GENERATOR + PIPELINE</span></h3>
+
+<div class="callout">
+  <strong>Strategic role:</strong> Events are not revenue-first — they're <strong>pipeline-first</strong>. Every serious exhibitor is a qualified buyer for a corporate studio. At conferences, buyers self-identify — making events the most efficient lead generation channel in the business.
+</div>
+
+<h4>Current Pricing (per reframe.fm/events)</h4>
+
+<table>
+  <tr><th>Package</th><th>Price</th><th>What's Included</th></tr>
+  <tr><td><strong>Event Studio Base Fee</strong></td><td><strong>$10,000</strong> per event</td><td>Complete multi-camera studio at venue, professional crew on-site, full setup and teardown, capacity to offer sessions to exhibitors/sponsors</td></tr>
+  <tr><td><strong>4-Session Bundle</strong> <span class="tag tag-green">BEST VALUE</span></td><td><strong>$5,000</strong></td><td>4 × 30-min recording sessions, 4 × 20-min edited videos, 20 social media clips, custom-branded virtual set, all camera angles + bonus 2-min highlight reel</td></tr>
+  <tr><td><strong>Single Session</strong></td><td><strong>$1,500</strong> per recording</td><td>30-min recording, 20-min edited video, 5 social media clips, custom-branded virtual set, all camera angles</td></tr>
+</table>
+
+<h4>How the Event Business Model Works</h4>
+<div class="card card-orange">
+  <ol>
+    <li>Book the <strong>$10K Event Studio Base Fee</strong> to bring the full ReFrame production to the event.</li>
+    <li>Capture content for the organizer's own brand — thought leadership, customer stories, event highlights.</li>
+    <li><strong>Offer sessions to exhibitors and sponsors as a premium add-on</strong> — organizer sets the pricing and keeps the margin.</li>
+    <li>Bring in a title sponsor to brand the studio and offset costs.</li>
+    <li>Include content packages in premium exhibitor or sponsorship tiers.</li>
+  </ol>
+  <p style="margin-top:10px;margin-bottom:0"><strong>Example:</strong> Organizer books $10K base + $5K 4-session bundle for themselves, then sells $1,500 or $5,000 packages to exhibitors/sponsors. Flexible structures: studio sponsorship visibility, exhibitor add-ons, revenue sharing, commissions for their sales team, custom arrangements.</p>
+</div>
+
+<p><strong>Revenue potential:</strong> 25-30 events/year — each event can range from $15K-$50K+ depending on exhibitor/sponsor uptake. Plus they feed corporate studio installations.</p>
+
+<hr class="divider">
+
+<h3 id="networks">Networks, Agencies & White-Label <span class="tag tag-purple">SCALE PLAY (LATER)</span></h3>
+
+<div class="callout">
+  <strong>Scale opportunity:</strong> Networks and agencies offer massive upside. The studio system stays the same across all products — one standardized deliverable, regardless of who the end client is. The difference is scale and distribution.
+</div>
+
+<p><strong>Website headline (reframe.fm/networks):</strong> "Scale your video lineup without scaling the complexity." — "Launch new shows in weeks, not months. One studio system, unlimited looks — each show gets its own branded virtual set."</p>
+
+<p><strong>Why they matter:</strong> One agency can bring 10+ end clients. Multi-show, multi-location contracts at 3-5× corporate ARPU. Technology advantage compounds with each show.</p>
+
+<p><strong>What ReFrame solves for them:</strong> Rapid show launches (sign talent → live in 2-3 weeks). Unlimited show differentiation (custom virtual set per show). Multiple shows from the same physical studio, each with its own branded look. Run one location or many — same broadcast quality everywhere. Centralized quality control across all shows.</p>
+
+<p><strong>Same deliverable, same pricing:</strong> 4 episodes + 20 clips monthly, per show. Same process (install → record → deliver). The difference is scale — they may run 5-50 shows through the same system. See <a href="#agency-program">Agency Partner Program</a> for the wholesale model.</p>
+
+<p><strong>Approach:</strong> The standard deliverable stays standard. No custom scopes. Agencies get the same "studio seat" every direct client gets. Network engagements are handled through consultation.</p>
+
+<hr class="divider">
+
+<h3 id="partner-studios">Partner Studios <span class="tag tag-blue">EXPLORATORY</span></h3>
+
+<p>Enable existing podcast/video studios to offer ReFrame virtual set production to their clients. Successful pilot with 3 locations (Boca Raton, Jupiter, Cleveland). Technology works without modification. Rapid deployment (2-3 days per install). Centralized post-production maintains quality.</p>
+
+<p><strong>Status:</strong> Proven technically and operationally. Partnership financial structure being refined. Currently secondary to corporate studio growth.</p>
+
+<hr class="divider">
+
+<h3 id="content-hub">The Content Hub <span class="tag tag-purple">STRATEGIC MOAT</span></h3>
+
+<div class="callout">
+  <strong>"ReFrame doesn't just repurpose content — it multiplies reach."</strong> The Content Hub is not just a feature — it's a defensibility layer. Bundled into premium tiers, it increases switching cost, perceived sophistication, contract value, and retention.
+</div>
+
+<h4>What It Is</h4>
+<p>A React-based web application delivering repurposed podcast content through branded client portals (reframe.fm/hub/[client-name]), backed by an 8-table Airtable relational database + multi-LLM content generation workflow.</p>
+
+<h4>Output Per Episode: 40-60+ Strategic Content Pieces</h4>
+<table>
+  <tr><th>Type</th><th>Quantity</th><th>Details</th></tr>
+  <tr><td>Video Clips</td><td>5-8</td><td>Vertical 9:16 with hooks, transcripts, captions, posting copy</td></tr>
+  <tr><td>Instagram Carousels</td><td>10</td><td>5-7 slides each with hooks, captions, hashtags</td></tr>
+  <tr><td>LinkedIn Posts</td><td>10</td><td>Mix of text posts and document carousels</td></tr>
+  <tr><td>Twitter/Threads</td><td>10</td><td>Platform-optimized short-form</td></tr>
+  <tr><td>Newsletters</td><td>5</td><td>800-1000 word articles with subject lines</td></tr>
+  <tr><td>Episode Metadata</td><td>1 set</td><td>YouTube descriptions, timestamps, best moments, strategy notes</td></tr>
+</table>
+
+<h4>The Content Independence Principle</h4>
+<p>Every piece stands alone and provides value to someone who has never heard the original podcast. This transforms repurposing from "recycling" into "reach multiplication." A LinkedIn post reaches people who'll never listen to podcasts. A carousel catches scrollers who've never heard of the guest.</p>
+
+<h4>Strategic Transparency</h4>
+<p>Each piece includes internal strategy sections (toggleable per client): Narrative Goal, Branding Goal, Strategy Type (18+ types including Vulnerability Play, Pattern Interrupt, Contrarian Take, Framework Drop), Why It Works, Posting Instructions.</p>
+
+<h4>Multi-LLM Workflow</h4>
+<p>Claude for LinkedIn posts, newsletters, long-form copywriting, strategic messaging. Gemini for Instagram carousels (visual composition). Custom prompts for 18+ strategy types. Content generated in-session with full episode context, refined before export, imported to Airtable via CSV.</p>
+
+<h4>Key IP Assets</h4>
+<ul>
+  <li>Content Independence principle and QA framework</li>
+  <li>18+ strategy type taxonomy</li>
+  <li>Multi-LLM orchestration workflow</li>
+  <li>White-label client architecture (branded portals, access codes)</li>
+  <li>React codebase + Airtable schema</li>
+  <li>Industry-specific content strategies (dental, faith-based, etc.)</li>
+</ul>
+
+<hr class="divider">
+
+<h3 id="smilestudio">SmileStudio.tv <span class="tag tag-orange">GRAVITY WELL — REFRAME-OWNED IP</span></h3>
+
+<div class="callout">
+  <strong>The "gravity well" concept in action.</strong> SmileStudio.tv is a ReFrame-owned media property in the dental vertical. ReFrame does for a specific industry what it helps clients do — and the margins are significant because it owns both the production and the media property. It's also a client acquisition engine for corporate ReFrame installs.
+</div>
+
+<h4>What It Is</h4>
+<p>A premium dental interview show hosted by <strong>Dr. Mike DiTolla</strong> — a respected dentist AND entertaining host who built Glidewell Dental's YouTube presence. The show offers a modern alternative to legacy dental production — authentic conversations, broadcast-quality virtual sets, and a full content ecosystem instead of just a single long-form video.</p>
+
+<h4>Why It's Strategic</h4>
+<div class="card card-orange">
+  <ul style="margin-bottom:0">
+    <li><strong>High margin:</strong> One-time packages ($7,500-$13,500) with no ongoing fulfillment obligation</li>
+    <li><strong>Client acquisition:</strong> Every dentist who appears becomes a warm lead for a corporate ReFrame studio install</li>
+    <li><strong>Proof of concept:</strong> Demonstrates to all verticals what ReFrame technology can do</li>
+    <li><strong>Client acquisition pipeline:</strong> Records in-studio and at dental trade shows, feeding both SmileStudio revenue and corporate ReFrame leads</li>
+  </ul>
+</div>
+
+<h4>SmileStudio.tv Pricing Tiers</h4>
+<table>
+  <tr><th>Tier</th><th>Price</th><th>Session</th><th>Episodes</th><th>Video Clips</th><th>Content Hub</th></tr>
+  <tr><td><strong>Foundation</strong></td><td>$7,500</td><td>3 hours</td><td>2 × 30-min</td><td>—</td><td>—</td></tr>
+  <tr><td><strong>Amplify</strong></td><td>$11,500</td><td>3 hours</td><td>2 × 30-min</td><td>10 interview clips</td><td>Full access — ~10 carousels, ~10 LinkedIn posts, ~10 Twitter/Threads, ~5 newsletters per episode</td></tr>
+  <tr><td><strong>Dominate</strong></td><td>$13,500</td><td>4 hours</td><td>2 × 30-min</td><td>30 total (10 interview + 20 Hook Session)</td><td>Full access + expanded content</td></tr>
+</table>
+
+<h4>The Two-Episode Framework</h4>
+<p><strong>Episode 1 — The Story:</strong> Origin, personal journey, practice philosophy, what makes them unique. Builds trust and personal connection.<br>
+<strong>Episode 2 — The Work:</strong> Clinical expertise, case studies, patient transformations. Establishes authority and gives patients confidence.</p>
+
+<h4>The Hook Session (Dominate Only)</h4>
+<p>20 custom-scripted questions engineered for social media. Not cut from interviews — purpose-built scroll-stopping content. Example hooks: "Dentures should be illegal in 2025 — agree or disagree?" / "What's the biggest lie patients believe about implants?"</p>
+
+<h4>Competitive Edge vs. Legacy Production</h4>
+<table>
+  <tr><th>Dimension</th><th>Legacy Production</th><th>SmileStudio.tv</th></tr>
+  <tr><td>Style</td><td>Scripted, infomercial feel</td><td>Authentic, unscripted conversations</td></tr>
+  <tr><td>Production</td><td>Dated generic studios</td><td>Custom-branded virtual sets (broadcast quality)</td></tr>
+  <tr><td>Host</td><td>Non-industry hosts (no clinical credibility)</td><td>Dr. Mike DiTolla — respected dentist + entertainer</td></tr>
+  <tr><td>Deliverables</td><td>Just the long-form episode</td><td>2 episodes + up to 30 clips + 60+ written pieces</td></tr>
+  <tr><td>Social strategy</td><td>None or minimal</td><td>Social-first design with Content Hub</td></tr>
+</table>
+
+<h4>The Rule: Only Build Gravity Wells Where You Operate</h4>
+<p>SmileStudio.tv works because dental is a vertical where ReFrame already has deep roots — existing clients, trade show presence, industry relationships, and an ideal host in Dr. Mike DiTolla. The principle is simple: gravity well shows should only be built in verticals where there's already an operational foothold. As ReFrame expands into new verticals with corporate installs, those verticals become candidates for their own gravity well shows.</p>
+
+<hr class="divider">
+
+<!-- ==================== III. PRICING & ECONOMICS ==================== -->
+
+<h2 id="pricing">III. Pricing & Economics</h2>
+
+<h3>The Prepay Ladder</h3>
+
+<p>ReFrame's published rate is "From $5,995/mo." Clients who prepay receive meaningful discounts. The pricing ladder is designed to reward commitment while maintaining flexibility.</p>
+
+<table>
+  <tr><th>Plan</th><th>Price</th><th>Savings</th><th>Y1 Total (w/ $5K activation)</th></tr>
+  <tr><td><strong>Full Annual (anchor)</strong></td><td>$5,995 × 12</td><td>—</td><td>$76,940</td></tr>
+  <tr><td><strong>Annual PIF</strong></td><td>$59,950 (buy 10, get 2 free)</td><td>~$11,990 (~17%)</td><td>$64,950</td></tr>
+  <tr><td><strong>Quarterly</strong></td><td>$66,185 (~8% off)</td><td>~$5,755</td><td>$71,185</td></tr>
+  <tr><td><strong>Monthly</strong></td><td>$5,995/mo (no discount)</td><td>—</td><td>$76,940</td></tr>
+</table>
+
+<div class="card card-orange">
+  <div class="card-title orange">Key Rules</div>
+  <ul style="margin-bottom:0">
+    <li><strong>12-month minimum.</strong> No month-to-month. Too much upfront investment ($20K hardware + custom virtual set design).</li>
+    <li><strong>$5,000 activation on all plans.</strong> Covers design consultation, custom virtual set creation, and professional installation.</li>
+    <li><strong>Early termination:</strong> A waived "flex fee" (e.g. $5,000) becomes due if the 12-month commitment is broken early.</li>
+    <li><strong>Less frequent billing correlates with longer client retention.</strong> Annual plans materially extend average client stay.</li>
+  </ul>
+</div>
+
+<h4>Pricing Trajectory</h4>
+<p>$5,995/mo is positioned within the "no board approval needed" band for most mid-market companies. As the client base grows and case studies accumulate, there is clear room to move toward $8K-$12K/mo for premium positioning.</p>
+
+<hr class="divider">
+
+<h3 id="unit-economics">Unit Economics (Per Studio)</h3>
+
+<table>
+  <tr><th>Cost Item</th><th>Amount</th><th>Notes</th></tr>
+  <tr><td>Hardware + Install</td><td>$20,000</td><td>One-time (sunk after Y1)</td></tr>
+  <tr><td>Service COGS</td><td>$1,350/mo ($16,200/yr)</td><td>Post-production, delivery</td></tr>
+  <tr><td><strong>Total Y1 COGS</strong></td><td><strong>$36,200</strong></td><td></td></tr>
+</table>
+
+<h4>Gross Profit by Plan (Year 1)</h4>
+<table>
+  <tr><th>Plan</th><th>Y1 Revenue</th><th>Y1 COGS</th><th>Y1 Gross Profit</th><th>Margin</th></tr>
+  <tr><td>Monthly</td><td>$76,940</td><td>$36,200</td><td>$40,740</td><td>53%</td></tr>
+  <tr><td>Quarterly</td><td>$71,185</td><td>$36,200</td><td>$34,985</td><td>49%</td></tr>
+  <tr><td>Annual PIF</td><td>$64,950</td><td>$36,200</td><td>$28,750</td><td>44%</td></tr>
+</table>
+
+<h4>Gross Profit by Plan (Year 2+)</h4>
+<p>Hardware is sunk after Year 1. Only ongoing service COGS remain ($16,200/yr). No activation fee on renewal.</p>
+<table>
+  <tr><th>Plan</th><th>Y2 Revenue</th><th>Y2 COGS</th><th>Y2 Gross Profit</th><th>Margin</th></tr>
+  <tr><td>Monthly</td><td>$71,940</td><td>$16,200</td><td>$55,740</td><td>77%</td></tr>
+  <tr><td>Quarterly</td><td>$66,185</td><td>$16,200</td><td>$49,985</td><td>76%</td></tr>
+  <tr><td>Annual PIF</td><td>$59,950</td><td>$16,200</td><td>$43,750</td><td>73%</td></tr>
+</table>
+
+<div class="callout-good callout">
+  <strong>The renewal flywheel:</strong> Every retained studio shifts from ~50% margin to ~75%+ margin in Year 2. If the average client stays 3 years, lifetime gross profit exceeds $100K per studio.
+</div>
+
+<hr class="divider">
+
+<h3 id="cac">CAC Caps & Guardrails</h3>
+
+<p>Target: <strong>5:1 LTGP:CAC</strong>. All commission, sales costs, and promotional spend are structured to fit within these caps.</p>
+
+<table>
+  <tr><th>Plan</th><th>Y1 LTGP</th><th>Max CAC (5:1)</th></tr>
+  <tr><td>Monthly</td><td>$40,740</td><td>$8,148</td></tr>
+  <tr><td>Quarterly</td><td>$34,985</td><td>$6,997</td></tr>
+  <tr><td>Annual PIF</td><td>$28,750</td><td>$5,750</td></tr>
+</table>
+
+<hr class="divider">
+
+<h3 id="money-model">Money Model at Scale (5-10 Year Vision)</h3>
+
+<table>
+  <tr><th>Line</th><th>Configuration</th><th>Revenue</th></tr>
+  <tr><td>Corporate Studios (core)</td><td>200 active × $6K/mo</td><td>$14.4M ARR + ~$1M activations</td></tr>
+  <tr><td>Networks / Agencies (upsell)</td><td>15 partners × $20K/mo avg</td><td>$3.6M ARR</td></tr>
+  <tr><td>Events (fast cash + lead gen)</td><td>25-30 events × $30K avg</td><td>$0.75-0.9M/yr</td></tr>
+  <tr><td><strong>Total</strong></td><td></td><td><strong>~$19-20M/yr</strong> at 40-50% gross</td></tr>
+</table>
+
+<p><strong>Upper bound:</strong> With successful network expansion, international growth, and maintained quality of service — $50M+ over a longer horizon.</p>
+<p><strong>What has to be true:</strong> One repeatable acquisition system feeding demos every day. A small lethal sales team. Ops that can handle 200+ concurrent studios.</p>
+
+<hr class="divider">
+
+<h3 id="tam">Current Capacity (SOM)</h3>
+
+<p><strong>4 installs/month = 48/year × $76,940 = $3,693,120 Y1 revenue.</strong> Gross profit at capacity: ~$1,955,520 (pre-commissions/overhead). This is the operational ceiling with the current team — if sales outpaces 4/month, the production and install team expands.</p>
+
+<hr class="divider">
+
+<!-- ==================== IV. IDEAL CUSTOMER ==================== -->
+
+<h2 id="icp">IV. The Ideal Customer</h2>
+
+<h3>ICP Criteria (Must Hit 4 of 6)</h3>
+
+<div class="card card-accent">
+  <ol>
+    <li><strong>$15M-$250M revenue</strong> (sweet spot) — inside the "no board approval needed" band</li>
+    <li><strong>Founder-influenced</strong> — decision-maker has a name and a face, not a committee</li>
+    <li><strong>Marketing-led growth</strong> — content, brand, and demand gen drive the business</li>
+    <li><strong>Not agency-controlled</strong> — they make their own marketing decisions</li>
+    <li><strong>Multi-location or scaling</strong> — content standardization is valuable to them</li>
+    <li><strong>Industry where video/podcast is exploding</strong> — market timing is favorable</li>
+  </ol>
+</div>
+
+<p><strong>Key contact titles:</strong> CMO, VP Marketing, Head of Content, Director of Communications, Marketing Manager. Strong signals include: existing podcast, job posts mentioning video content, or visible long-form content efforts.</p>
+
+<hr class="divider">
+
+<h3 id="verticals">Verticals (Priority Order)</h3>
+
+<table>
+  <tr><th>#</th><th>Vertical</th><th>Priority</th><th>Why</th></tr>
+  <tr><td>1</td><td><strong>Dental (DSOs + Tech)</strong></td><td><span class="tag tag-red">HIGHEST</span></td><td>Already operate here (3DDentists, SmileStudio). $44.7B market, 16.4% growth. 32% of practices now DSO-affiliated. Proof of concept exists.</td></tr>
+  <tr><td>2</td><td><strong>MedSpa / Aesthetics</strong></td><td><span class="tag tag-orange">HIGH</span></td><td>$15B+ market. Founder-led, marketing-heavy, franchise model. Content drives patient acquisition.</td></tr>
+  <tr><td>3</td><td><strong>Real Estate / PropTech</strong></td><td><span class="tag tag-orange">HIGH</span></td><td>Original "personal brand" industry. Studio-as-recruiting-tool pitch. Multi-office upside.</td></tr>
+  <tr><td>4</td><td><strong>FinTech / Financial</strong></td><td><span class="tag tag-purple">MED-HIGH</span></td><td>Spend massively on content. Need credibility. Broadcast-quality = "serious institution."</td></tr>
+  <tr><td>5</td><td><strong>SaaS / Tech</strong></td><td><span class="tag tag-blue">MEDIUM</span></td><td>Most content-forward category. Target companies already creating content poorly — upgrade pitch.</td></tr>
+  <tr><td>6</td><td><strong>DTC / E-Commerce</strong></td><td><span class="tag tag-blue">MEDIUM</span></td><td>Biggest podcast ADVERTISERS. Spend millions renting attention. "Why rent when you can own?"</td></tr>
+  <tr><td>7</td><td><strong>Professional Services</strong></td><td><span class="tag tag-blue">MEDIUM</span></td><td>Content IS the business model for coaching/consulting. Massive communities consume content.</td></tr>
+  <tr><td>8</td><td><strong>Home Services / Franchise</strong></td><td><span class="tag tag-green">LOWER</span></td><td>One deal = content across hundreds of locations. Longer sales cycle.</td></tr>
+  <tr><td>9</td><td><strong>Fitness / Wellness</strong></td><td><span class="tag tag-green">LOWER</span></td><td>Community-driven brands. Content builds culture and drives franchise sales.</td></tr>
+</table>
+
+<hr class="divider">
+
+<h3 id="la-advantage">LA-Local Advantage</h3>
+<p>ReFrame is headquartered in Los Angeles, where in-person closes convert at 3-5× the rate of remote. The LA market offers a dense concentration of high-fit companies including: Pearl (West Hollywood), Sunbit (LA), ServiceTitan (Glendale), FIGS (Santa Monica), ZipRecruiter (Santa Monica), Crexi (LA), MVMT (LA), Liquid Death (LA), Honest Company (LA), Xponential/StretchLab (Irvine), and 3DDentists (LA — existing client).</p>
+
+<hr class="divider">
+
+<h3 id="content-gap">The Content Gap Approach</h3>
+
+<p>ReFrame's best prospects are companies with a <strong>massive content gap</strong> — they should have a show but don't. They have the budget, the brand, and the need, but zero organic video content. This is the "empty space" ReFrame fills.</p>
+
+<p><strong>Qualification signals:</strong> No YouTube channel or dormant one. No podcast. Spending on YouTube/podcast ads (renting attention they could own). Recently hired marketing leadership. Recently raised funding or went public. Multiple offices with no content standardization.</p>
+
+<hr class="divider">
+
+<!-- ==================== V. TEAM & COMPENSATION ==================== -->
+
+<h2 id="ae-role">V. Team & Compensation</h2>
+
+<h3>Full-Cycle AE Role</h3>
+
+<p><strong>AE = Account Executive. Full-cycle = one person owns the whole sales cycle:</strong> qualify → run demo → present pricing → handle objections → close → contract → handoff. No setter/closer split until demand warrants it.</p>
+
+<p><strong>When to split roles:</strong> Only when demand exceeds one person's throughput — 8-10 qualified kept calls/week consistently, close rate drops from capacity (not skill), missing follow-ups due to volume. Then hire a setter to book/confirm.</p>
+
+<hr class="divider">
+
+<h3 id="ae-comp">AE Comp Plan (Commission-Only, Milestone-Based)</h3>
+
+<table>
+  <tr><th>Plan</th><th>Total Commission</th><th>At Install</th><th>Day-60/90 Milestone</th><th>Kicker</th></tr>
+  <tr><td><strong>Annual PIF</strong></td><td>$5,500</td><td>$3,500</td><td>$2,000 at day-60</td><td>+$250 if install ≤14 days</td></tr>
+  <tr><td><strong>Quarterly</strong></td><td>$4,500</td><td>$3,000</td><td>$1,500 at day-60</td><td>—</td></tr>
+  <tr><td><strong>Monthly</strong></td><td>$4,000</td><td>$2,500</td><td>$1,500 at day-90</td><td>—</td></tr>
+</table>
+
+<p><strong>Key rules:</strong> 1099 contractor. Pay triggers at install (matching cash timing). If payment fails, unpaid milestones pause and resume on cure. Base salary considered once volume reaches ≥20 kept calls/month. If activation is waived on PIF, commission is reduced $500. "Install" = equipment delivered + install scheduled + activation cleared. "Good standing" = all invoices paid at milestone date.</p>
+
+<hr class="divider">
+
+<h3 id="am-comp">AM Comp Plan (For Hybrid Sales + AM Role)</h3>
+
+<table>
+  <tr><th>Component</th><th>Amount</th><th>Details</th></tr>
+  <tr><td><strong>Monthly AM Stipend</strong></td><td>$200/mo per active client</td><td>Covers: comms, gathering assets/brand guidelines, keeping episodes on track, coordinating internally, surfacing expansion opportunities</td></tr>
+  <tr><td><strong>Renewal Bonus</strong></td><td>5% of renewal contract value</td><td>When client signs new 12-month term. Example: ~$72K renewal → ~$3,500 bonus</td></tr>
+  <tr><td><strong>Expansion Bonus</strong></td><td>10% of Y1 revenue on incremental deal</td><td>Extra studio/location/show. Example: extra Annual PIF (~$65K) → ~$6,500</td></tr>
+</table>
+
+<h4>Side-by-Side: Why AM Matters</h4>
+<p>Using an Annual PIF studio as example:</p>
+<table>
+  <tr><th>Scenario</th><th>Year 1</th><th>Year 2</th><th>2-Year Total</th></tr>
+  <tr><td>Sell only (no AM)</td><td>$5,500</td><td>$0</td><td>$5,500</td></tr>
+  <tr><td>Sell + AM</td><td>$5,500 + $2,400 = $7,900</td><td>$3,500 + $2,400 = $5,900</td><td>$13,800</td></tr>
+  <tr><td>Sell + AM + 1 expansion</td><td>$7,900 + $6,500 = $14,400</td><td>$5,900</td><td>$20,300</td></tr>
+</table>
+
+<p><strong>Rules:</strong> Selling without managing the account yields Y1 sales commission only. If an account is reassigned, the new AM receives future stipends, renewals, and expansion bonuses. New sale = "sales" money. Same logo, new money = "AM" money.</p>
+
+<hr class="divider">
+
+<h3 id="candidate-pitch">The Earning Opportunity</h3>
+
+<div class="quote">
+  "Sell the account, get paid. Keep and grow the account, get paid again. Every renewal and every new studio added to the book throws off more commission. It's a portfolio of relationships that pays for years."
+</div>
+
+<p>Year 1: big commissions on new sales. From there, managing those accounts builds a book that pays monthly and drops significant checks on renewals and location expansions. The comp structure is designed to reward long-term relationship building — not just one-time closes.</p>
+
+<hr class="divider">
+
+<!-- ==================== VI. AGENCY PROGRAM ==================== -->
+
+<h2 id="agency-program">VI. Agency Partner Program</h2>
+
+<h3>ReFrame Agency Partner Program</h3>
+<p><em>White-label video podcast production for their clients</em></p>
+
+<h4>Who It's For</h4>
+<p>Podcast & content agencies, PR/comms firms, and networks that sell strategy, growth, PR, booking, or ads — but don't want to build or manage video production infrastructure.</p>
+
+<div class="quote"><strong>"You own the client. We power the production."</strong></div>
+
+<h4>What We Do (White-Label)</h4>
+<ul>
+  <li>Custom on-brand virtual set (not a template)</li>
+  <li>Provide and maintain ~$20K of pro equipment</li>
+  <li>Install and configure in the client's office</li>
+  <li>4 fully edited episodes + 20 hand-curated clips monthly</li>
+  <li>All post, exports, delivery under their brand</li>
+  <li>Turn one weekly recording into full cross-platform content</li>
+</ul>
+
+<h4>Wholesale Pricing (Per Studio)</h4>
+<table>
+  <tr><th>Item</th><th>Amount</th></tr>
+  <tr><td>Monthly Rate</td><td>$4,995</td></tr>
+  <tr><td>Activation Fee</td><td>$5,000</td></tr>
+  <tr><td>Term</td><td>12 months (non-cancelable)</td></tr>
+  <tr><td>Y1 Total</td><td>$64,940</td></tr>
+</table>
+
+<h4>Agency Margin Examples</h4>
+<table>
+  <tr><th>If They Charge</th><th>Their Monthly Spread</th></tr>
+  <tr><td>$5,995/mo (retail match)</td><td>$1,000/mo</td></tr>
+  <tr><td>$7,500/mo (with strategy)</td><td>$2,505/mo</td></tr>
+  <tr><td>$10,000/mo (full program)</td><td>$5,005/mo</td></tr>
+</table>
+
+<p><strong>Payment:</strong> ReFrame bills the agency. The agency bills the client. If a client churns, the agency is still responsible for payment to ReFrame.</p>
+
+<h4>Responsibilities Split</h4>
+<table>
+  <tr><th>ReFrame</th><th>Agency</th></tr>
+  <tr><td>Equipment sourcing, install, maintenance</td><td>Own client relationship and contract</td></tr>
+  <tr><td>Virtual set design and revisions</td><td>Client strategy, content direction, distribution</td></tr>
+  <tr><td>Recording workflow guidance</td><td>Scheduling recordings and approvals</td></tr>
+  <tr><td>Editing 4 episodes + 20 clips/mo</td><td>First-line communication with client</td></tr>
+  <tr><td>Secure file delivery, asset org</td><td></td></tr>
+</table>
+
+<p><strong>White-label rule:</strong> "We never present ourselves to your clients as ReFrame, and we will not market or sell directly to them. You are the face; we stay invisible."</p>
+
+<p><strong>How to start:</strong> 15-min partner call → Sign agreement → 1-2 pilot clients → Install + refine → Scale. "Ask about our 'first 2 pilot clients' rollout so you can test us without risking your whole roster."</p>
+
+<hr class="divider">
+
+<!-- ==================== VII. STRATEGIC PRIORITIES ==================== -->
+
+<h2 id="priority-stack">VII. Strategic Priorities</h2>
+
+<h3>The Priority Stack</h3>
+
+<div class="card card-accent">
+  <div class="card-title blue">ReFrame's strategic roadmap — sequenced by priority.</div>
+  <ol style="margin-bottom:0">
+    <li><strong>Corporate installs</strong> — the core business and primary growth engine</li>
+    <li><strong>Events as pipeline</strong> — live lead generation that feeds corporate studio sales</li>
+    <li><strong>Content Hub bundled</strong> — increases switching cost, retention, and perceived value as a premium tier add-on</li>
+    <li><strong>SmileStudio.tv</strong> — gravity well in dental. High-margin revenue + client acquisition engine</li>
+    <li><strong>Future ecosystem shows</strong> — expansion into new verticals where ReFrame already has an operational foothold</li>
+    <li><strong>Partner studios / agency program</strong> — scaled distribution once corporate base is established</li>
+  </ol>
+</div>
+
+<hr class="divider">
+
+<p style="text-align:center;color:var(--text-dim);font-size:13px;margin-top:40px">
+  ReFrame Studios &middot; jonathan@reframe.fm &middot; (801) 477-0340 &middot; reframe.fm<br>
+  ReFrame Studios Business Overview &middot; February 2026
+</p>
+
+</main>
+</div>
+</body>
+</html>
